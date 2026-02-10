@@ -1,0 +1,35 @@
+<div class="min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <div class="container h-16 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <h1 class="text-xl font-bold" style="color: var(--primary-color);">InventorySystem</h1>
+      </div>
+      <nav class="flex items-center gap-6">
+        <a routerLink="/dashboard" routerLinkActive="text-primary font-medium"
+          class="text-sm font-medium text-gray hover:text-primary transition-colors">Dashboard</a>
+        
+        @if (authService.isManager()) {
+        <a routerLink="/inventory" routerLinkActive="text-primary font-medium"
+          class="text-sm font-medium text-gray hover:text-primary transition-colors">Inventory</a>
+        }
+        
+        @if (authService.isLoggedIn()) {
+          <div class="flex items-center gap-4 ml-4 border-l pl-4 border-gray-200">
+            <span class="text-xs text-gray-500 uppercase font-semibold">
+              {{ authService.currentRole() }}
+            </span>
+            <button (click)="authService.logout()" class="text-sm text-red-600 hover:text-red-800 font-medium">
+              Logout
+            </button>
+          </div>
+        }
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-1 container py-6">
+    <router-outlet />
+  </main>
+</div>
